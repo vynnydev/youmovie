@@ -2,7 +2,7 @@ version: "3"
 
 services:
   app:
-    container_name: youhealth-api
+    container_name: youmovie-api
     build: .
     depends_on:
       - postgres
@@ -24,7 +24,7 @@ services:
       PORT: 3000
       DB_HOST: postgres
   jobs:
-    container_name: youhealth-jobs
+    container_name: youmovie-jobs
     image: node:dubnium-alpine
     working_dir: /usr/jobs
     command: sh -c "yarn install && yarn build && yarn queue"
@@ -38,16 +38,16 @@ services:
       NODE_ENV: dev
       DB_HOST: postgres
   postgres:
-    container_name: youhealth-postgres
+    container_name: youmovie-postgres
     image: postgres:11
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_DB: gamenoover
+      POSTGRES_DB: youmovie
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 46b7c9444562074a690ff94e53841c5d
   mongo:
-    container_name: youhealth-mongo
+    container_name: youmovie-mongo
     image: mongo
     environment:
       MONGO_INITDB_ROOT_USERNAME: root_mongo
@@ -55,7 +55,7 @@ services:
     ports:
       - "27017:27017"
   redis:
-    container_name: youhealth-redis
+    container_name: youmovie-redis
     image: redis:alpine
     expose:
       - 6379
